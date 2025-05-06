@@ -13,22 +13,28 @@ use Illuminate\Support\Facades\Hash;
 class DatabaseSeeder extends Seeder
 {
     public function run()
-    {
-        // Create Admin User
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password'),
+{
+    // Membuat admin jika belum ada
+    \App\Models\User::firstOrCreate(
+        ['email' => 'admin@example.com'],
+        [
+            'name' => 'Admin User',
+            'password' => Hash::make('admin12345678'),
             'role' => 'admin',
-        ]);
+        ]
+    );
 
-        // Create Regular User
-        User::create([
-            'name' => 'Mahasiswa',
-            'email' => 'mahasiswa@example.com',
-            'password' => Hash::make('password'),
+    // Membuat user jika belum ada
+    \App\Models\User::firstOrCreate(
+        ['email' => 'mahasiswa@example.com'],
+        [
+            'name' => 'Regular User',
+            'password' => Hash::make('user12345678'),
             'role' => 'user',
-        ]);
+        ]
+    );
+
+
 
         // Seed Kegiatan
         $infest = Kegiatan::create([

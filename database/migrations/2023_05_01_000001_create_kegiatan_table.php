@@ -4,30 +4,34 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKegiatanTable extends Migration
+class AddColumnsToKegiatanTable extends Migration
 {
     /**
-     * Jalankan migrasi untuk membuat tabel kegiatan.
+     * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('kegiatan', function (Blueprint $table) {
-            $table->id();  // Kolom ID utama
-            $table->string('nama_kegiatan');  // Nama kegiatan
-            $table->text('deskripsi')->nullable();  // Deskripsi kegiatan (nullable)
-            $table->timestamps();  // Kolom waktu (created_at, updated_at)
+        Schema::table('kegiatan', function (Blueprint $table) {
+            $table->string('nama');  // Menambahkan kolom 'nama'
+            $table->text('deskripsi');  // Menambahkan kolom 'deskripsi'
+            $table->date('tanggal_mulai');  // Menambahkan kolom 'tanggal_mulai'
+            $table->date('tanggal_selesai');  // Menambahkan kolom 'tanggal_selesai'
+            $table->string('status');  // Menambahkan kolom 'status'
+            $table->timestamps();
         });
     }
 
     /**
-     * Hapus tabel kegiatan jika migrasi dibatalkan.
+     * Reverse the migrations.
      *
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('kegiatan');
+        Schema::table('kegiatan', function (Blueprint $table) {
+            $table->dropColumn(['nama', 'deskripsi', 'tanggal_mulai', 'tanggal_selesai', 'status']);
+        });
     }
 }

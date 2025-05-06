@@ -227,7 +227,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-logo">
-            <img src="{{ asset("images\logo.png") }}" alt="Logo SIM-KEMA">
+            <img src="{{ asset('images\logo.png') }}" alt="Logo SIM-KEMA">
             <span>SIM-KEMA</span>
         </div>
         
