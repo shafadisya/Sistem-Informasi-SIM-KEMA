@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\KegiatanController;
 use App\Http\Controllers\Admin\PanitiaController;
 use App\Http\Controllers\Admin\SertifikatController;
@@ -13,10 +15,26 @@ use App\Http\Controllers\User\DokumentasiController as UserDokumentasiController
 use App\Http\Controllers\User\PelaporanController as UserPelaporanController;
 
 // Auth Routes (Login, Register, Logout)
-Auth::routes();
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::get('/register', function () {
+    return view('login-register.register');
+});
+
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/login', function () {
+    return view('login-register.login');
+});
+
+Route::get('/dashboard', function () {
+    return 'Welcome to your dashboard!';
+})->middleware('auth');
 
 // Route::middleware(['auth', 'admin'])->get('/admin-dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-// // Admin Routes (menggunakan middleware 'auth' dan 'admin' untuk akses hanya admin)
+// // Admin Routes (menggunakan middleware 'auth' dan 'admin' untuk akses h`anya admin)
 // Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
 //     // Kegiatan Routes (Admin dapat melakukan CRUD)
 //     Route::get('/kegiatan', [KegiatanController::class, 'index'])->name('kegiatan.index');
