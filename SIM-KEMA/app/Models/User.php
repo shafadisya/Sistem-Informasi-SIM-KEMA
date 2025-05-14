@@ -19,8 +19,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'nim',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -44,5 +46,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function getAuthIdentifierName()
+    {
+        return 'nim';
     }
 }
