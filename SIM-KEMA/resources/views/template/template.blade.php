@@ -17,6 +17,9 @@
             <img src="{{ asset('logo.png') }}" alt="HMIF">
             <span>SIM-KEMA</span>
         </div>
+        <div class="main-content">
+            @yield('content')
+        </div>
 
         <ul class="sidebar-menu">
             <li>

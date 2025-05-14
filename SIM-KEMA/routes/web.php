@@ -7,9 +7,9 @@ use App\Http\Controllers\SertifikatController;
 use App\Http\Controllers\DokumentasiController;
 
 
-Route::get('/admin/dokumentasi', function () {
-    return view('admin.dokumentasi');
-})->name('dokumentasi');
+// Route::get('/admin/dokumentasi', function () {
+//     return view('admin.dokumentasi');
+// })->name('dokumentasi');
 
 // Halaman Admin
 Route::get('/admin/daftar-panitia', function () {
@@ -29,3 +29,10 @@ Route::get('/admin/sertifikat', [SertifikatController::class, 'index'])->name('a
 Route::post('/admin/sertifikat', [SertifikatController::class, 'store'])->name('admin.sertifikat.store');
 Route::put('/admin/sertifikat/{id}', [SertifikatController::class, 'update'])->name('admin.sertifikat.update');
 Route::delete('/admin/sertifikat/{id}', [SertifikatController::class, 'destroy'])->name('admin.sertifikat.destroy');
+
+Route::prefix('admin')->group(function () {
+    Route::get('/dokumentasi', [DokumentasiController::class, 'index'])->name('admin.dokumentasi');
+    Route::post('/dokumentasi', [DokumentasiController::class, 'store'])->name('admin.dokumentasi.store');
+    Route::put('/dokumentasi/{id}', [DokumentasiController::class, 'update'])->name('admin.dokumentasi.update');
+    Route::delete('/dokumentasi/{id}', [DokumentasiController::class, 'destroy'])->name('admin.dokumentasi.destroy');
+});

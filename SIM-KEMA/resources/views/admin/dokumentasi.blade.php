@@ -1,4 +1,6 @@
 @extends('template.template')
+</div>
+</div>
 <div class="title-kegiatan">
     <h1>Kelola Dokumentasi</h1>
 </div>
@@ -30,39 +32,28 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>INFEST</td>
-                <td>Berikut kami tampilkan file dokumentasi</td>
-                <td>13 Mei 2025</td>
-                <td>
-                    <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Hapus</button>
-                </td>
-            </tr>
-            <tr>
-                <td>POINT</td>
-                <td>Berikut kami tampilkan file dokumentasi</td>
-                <td>10 Mei 2025</td>
-                <td>
-                    <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Hapus</button>
-                </td>
-            </tr>
-            <tr>
-                <td>DETIK</td>
-                <td>Berikut kami tampilkan file dokumentasi</td>
-                <td>8 Mei 2025</td>
-                <td>
-                    <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Hapus</button>
-                </td>
-            </tr>
+            @foreach ($dokumentasi as $item)
+                <tr>
+                    <td>{{ $item->nama_kegiatan }}</td>
+                    <td>{{ $item->deskripsi }}</td>
+                    <td>{{ $item->file }}</td>
+                    <td>
+                        <form action="{{ route('admin.dokumentasi.update', $item->id) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <button class="btn btn-primary">Edit</button>
+                        </form>
+                        <form action="{{ route('admin.dokumentasi.destroy', $item->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="app.js"></script>
-</body>
-
-</html>
