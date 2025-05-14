@@ -12,6 +12,6 @@ class Dokumentasi extends Model
     protected $fillable = [
         'nama_kegiatan',
         'deskripsi',
-        'file',
+        'url',
     ];
 }

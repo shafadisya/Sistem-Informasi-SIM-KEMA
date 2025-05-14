@@ -1,12 +1,9 @@
 @extends('template.template')
-</div>
-</div>
-<div class="title-kegiatan">
+<div class="title-kegiatan d-flex justify-content-between align-items-center">
     <h1>Kelola Dokumentasi</h1>
+    <button class="tambah-kegiatan" id="btn-tambah">+ Tambah Dokumentasi</button>
 </div>
-<div class="tambah">
-    <span><button class="tambah-kegiatan">+ Tambah Dokumentasi</button></span>
-</div>
+
 </div>
 <form action="" class="search">
     <input type="text" placeholder="Cari Dokumentasi...." class="form-control" id="search">
@@ -55,5 +52,31 @@
         </tbody>
     </table>
 </div>
-
+@section('content')
+    <div class="container mt-5">
+        <form action="{{ route('admin.dokumentasi.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="mb-3">
+                <label for="nama_kegiatan" class="form-label">Nama Kegiatan</label>
+                <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan" required>
+            </div>
+            <div class="mb-3">
+                <label for="deskripsi" class="form-label">Deskripsi</label>
+                <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="url" class="form-label">URL Dokumentasi</label>
+                <input type="url" class="form-control" id="url" name="url"
+                    placeholder="https://example.com/file.pdf" required>
+            </div>
+            <button type="submit" class="btn btn-success">Simpan</button>
+        </form>
+    </div>
+@endsection
+<script>
+    document.getElementById('btn-tambah').addEventListener('click', function() {
+        // Fokus pada input nama kegiatan di sidebar
+        document.getElementById('nama_kegiatan').focus();
+    });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

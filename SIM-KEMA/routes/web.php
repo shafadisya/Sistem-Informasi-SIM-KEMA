@@ -36,3 +36,9 @@ Route::prefix('admin')->group(function () {
     Route::put('/dokumentasi/{id}', [DokumentasiController::class, 'update'])->name('admin.dokumentasi.update');
     Route::delete('/dokumentasi/{id}', [DokumentasiController::class, 'destroy'])->name('admin.dokumentasi.destroy');
 });
+
+// Menampilkan form tambah dokumentasi
+Route::get('/admin/dokumentasi/create', [DokumentasiController::class, 'create'])->name('admin.dokumentasi.create');
+
+// Menyimpan data dokumentasi
+Route::post('/admin/dokumentasi', [DokumentasiController::class, 'store'])->name('admin.dokumentasi.store');

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_kegiatan');
             $table->text('deskripsi');
-            $table->string('url');
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }

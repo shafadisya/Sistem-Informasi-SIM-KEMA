@@ -20,12 +20,17 @@ class DokumentasiController extends Controller
         return view('admin.dokumentasi', compact('dokumentasi', 'filter'));
     }
 
+    public function create()
+    {
+        return view('admin.dokumentasi.create');
+    }
+
     public function store(Request $request)
     {
         $request->validate([
             'nama_kegiatan' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'file' => 'required|url',
+            'url' => 'required|url', // Pastikan kolom 'url' divalidasi
         ]);
 
         Dokumentasi::create($request->all());
