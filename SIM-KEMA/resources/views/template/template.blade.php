@@ -35,7 +35,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.dokumentasi') }}">
+                <a href="{{ url('admin/dokumentasi') }}">
                     <i class="fas fa-images text-primary"></i> Kelola Dokumentasi
                 </a>
             </li>

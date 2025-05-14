@@ -1,6 +1,4 @@
 @extends('template.template')
-</div>
-</div>
 <div class="title-kegiatan">
     <h1>Kelola Dokumentasi</h1>
 </div>
@@ -65,3 +63,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="app.js"></script>
+</body>
+
+</html>
