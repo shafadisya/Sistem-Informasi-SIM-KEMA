@@ -1,58 +1,68 @@
 @extends('template.template')
+
 <div class="title-kegiatan">
     <h1>Daftar Kegiatan</h1>
 </div>
-<div class="tambah">
-    <span><button class="tambah-kegiatan">+ Tambah kegiatan</button></span>
-</div>
+
+<!-- Tombol untuk menampilkan form -->
+<button id="showFormButton" class="tambah-kegiatan">+ Tambah Kegiatan</button>
+
+<!-- Form tambah kegiatan (disembunyikan secara default) -->
+<div class="kotak" id="formTambahKegiatan" style="display: none; margin-top: 20px;">
+    <form action="{{ route('admin.kegiatan.store') }}" method="POST">
+        @csrf
+        <input class="isi" type="text" name="judul" placeholder="Judul Kegiatan" required>
+        <textarea class="isi" name="deskripsi" placeholder="Deskripsi Kegiatan" required></textarea>
+        <button type="submit" class="btn-simpan">Simpan</button>
+    </form>
 </div>
 
 <div class="kegiatan">
-    <div class="kotak">
-        <div class="macam-kegiatan">
-            <div class="header-kegiatan">
-                <h2>INFEST</h2>
-                <button class="edit-btn">
-                    <i class="fas fa-pen"></i> Edit
-                </button>
+    @foreach ($kegiatan as $item)
+        <div class="kotak">
+            <div class="macam-kegiatan">
+                <div class="header-kegiatan">
+                    <h2>{{ $item->judul }}</h2>
+                    <form action="{{ route('admin.kegiatan.update', $item->id) }}" method="POST"
+                        style="display:inline;">
+                        @csrf
+                        @method('PUT')
+                        <button class="edit-btn">
+                            <i class="fas fa-pen"></i> Edit
+                        </button>
+                    </form>
+                </div>
+                <p>{{ $item->deskripsi }}</p>
             </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid amet temporibus sunt tenetur esse natus
-                vitae!</p>
-            <button class="btn-daftar"><a href="{{ url('daftar-panitia-admin') }}">Daftar Panitia</a></button>
         </div>
-    </div>
+    @endforeach
 </div>
-<div class="kegiatan">
-    <div class="kotak">
-        <div class="macam-kegiatan">
-            <div class="header-kegiatan">
-                <h2>POINT</h2>
-                <button class="edit-btn">
-                    <i class="fas fa-pen"></i> Edit
-                </button>
-            </div>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem culpa in quia dolores ex tempore.
-                Mollitia incidunt sapiente illum velit unde, deserunt distinctio quibusdam maxime id odio tempore, ex
-                laudantium.</p>
-            <button class="btn-daftar"><a href="/daftar-panitia.html">Daftar Panitia</a></button>
-        </div>
-    </div>
+
+
+<div id="editModal" style="display: none;" class="kotak">
+    <form id="editForm" action="" method="POST">
+        @csrf
+        @method('PUT')
+        <input type="text" name="judul" id="editJudul" placeholder="Judul Kegiatan" required>
+        <textarea name="deskripsi" id="editDeskripsi" placeholder="Deskripsi Kegiatan" required></textarea>
+        <button type="submit" class="btn-simpan">Simpan Perubahan</button>
+    </form>
 </div>
-<div class="kegiatan">
-    <div class="kotak">
-        <div class="macam-kegiatan">
-            <div class="header-kegiatan">
-                <h2>DETIK</h2>
-                <button class="edit-btn">
-                    <i class="fas fa-pen"></i> Edit
-                </button>
-            </div>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet tenetur ex dolores dolorum nisi fugit
-                accusamus cum mollitia saepe. Natus aspernatur neque, modi recusandae corporis alias error nemo nostrum
-                ad.</p>
-            <button class="btn-daftar"><a href="/daftar-panitia.html">Daftar Panitia</a></button>
-        </div>
-    </div>
-</div>
-</div>
-</div>
+
+<script>
+    document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const kegiatanId = this.closest('form').action.split('/').pop();
+            const judul = this.closest('.header-kegiatan').querySelector('h2').textContent;
+            const deskripsi = this.closest('.macam-kegiatan').querySelector('p').textContent;
+
+            document.getElementById('editForm').action = `/admin/kegiatan/${kegiatanId}`;
+            document.getElementById('editJudul').value = judul;
+            document.getElementById('editDeskripsi').value = deskripsi;
+
+            document.getElementById('editModal').style.display = 'block';
+        });
+    });
+</script>
