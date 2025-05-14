@@ -30,7 +30,7 @@ class DokumentasiController extends Controller
         $request->validate([
             'nama_kegiatan' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'url' => 'required|url', // Pastikan kolom 'url' divalidasi
+            'file' => 'required|url',
         ]);
 
         Dokumentasi::create($request->all());
