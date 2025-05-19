@@ -1,0 +1,279 @@
+@extends('template.template_user')<!-- atau layout user seperti 'layouts.user' -->
+
+@section('content')
+
+<style>
+     /* Base styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 270px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background-color: #c8e0ef;
+            padding-top: 20px;
+        }
+
+        .sidebar-logo {
+            text-align: left;
+            padding: 10px 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar-logo img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .sidebar-logo span {
+            font-family: "Times New Roman";
+            font-style: italic;
+            font-size: 24px;
+            font-weight: bold;
+            color: #29447c;
+        }
+
+        .sidebar-menu {
+            padding: 0;
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            width: 100%;
+        }
+
+        .sidebar-menu li a {
+            display: flex;
+            align-items: center;
+            color: #29447c;
+            padding: 15px 20px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .sidebar-menu li a:hover,
+        .sidebar-menu li a.active {
+            background-color: #b9d9ee;
+        }
+
+        .sidebar-menu li a i {
+            margin-right: 15px;
+            font-size: 18px;
+            color: #3498db;
+        }
+
+        /* Active menu item */
+        .sidebar-menu li.active a {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Main content area */
+        .content-wrapper {
+            margin-left: 270px;
+            padding: 30px;
+        }
+        .main-content {
+            margin-left: 270px;
+            padding: 30px;
+        }
+
+        /* Page title */
+        .page-title {
+            color: #29447c;
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        /* Event cards */
+        .event-card {
+            background-color: #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .event-title {
+            color: #29447c;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        .event-desc {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        /* Button styling */
+        .btn-daftar {
+            background-color: #29447c;
+            color: white;
+            padding: 8px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+            border: none;
+            font-weight: 500;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        .btn-daftar:hover {
+            background-color: #1e3460;
+            color: white;
+        }
+
+        /* Status indicators */
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .status-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .status-accepted {
+            background-color: #28a745;
+        }
+
+        .status-rejected {
+            background-color: #dc3545;
+        }
+
+        .status-none {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+        }
+
+        .status-text {
+            font-style: italic;
+            font-size: 14px;
+        }
+
+        
+  
+    .main-content {
+      flex-grow: 1;
+      padding: 40px;
+    }
+
+    .header h1 {
+      font-style: italic;
+      color: #2e3d91;
+    }
+
+    .kegiatan-list {
+      margin-top: 30px;
+    }
+
+    .kegiatan-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #e0e0e0;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .kegiatan-item.disabled {
+      background-color: #f3f3f3;
+      color: #b0b0b0;
+    }
+
+    .kegiatan-item h2 {
+      margin: 0;
+      font-size: 24px;
+      color: inherit;
+    }
+
+    .add-btn {
+      background-color: #2e3d91;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .add-btn:disabled {
+      background-color: #c0c0c0;
+      cursor: not-allowed;
+    }
+
+    .coming-soon {
+      position: absolute;
+      right: 70px;
+      font-size: 14px;
+      font-style: italic;
+      color: #888;
+    }
+  </style>
+<div class="content-wrapper">
+    <h1 class="page-title">Daftar Kegiatan</h1>
+
+    <!-- Event Card 1 -->
+    <div class="event-card">
+        <h2 class="event-title">INFEST</h2>
+        <p class="event-desc">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. 
+            Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.
+        </p>
+        <a href="#" class="btn-daftar">Daftar Panitia</a>
+        <div class="status-indicator">
+            <span class="status-dot status-accepted"></span>
+            <span class="status-text">accepted</span>
+        </div>
+    </div>
+
+    <!-- Event Card 2 -->
+    <div class="event-card">
+        <h2 class="event-title">POINT</h2>
+        <p class="event-desc">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. 
+            Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.
+        </p>
+        <a href="#" class="btn-daftar">Daftar Panitia</a>
+        <div class="status-indicator">
+            <span class="status-dot status-rejected"></span>
+            <span class="status-text">rejected</span>
+        </div>
+    </div>
+
+    <!-- Event Card 3 -->
+    <div class="event-card">
+        <h2 class="event-title">DETIK</h2>
+        <p class="event-desc">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. 
+            Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.
+        </p>
+        <a href="#" class="btn-daftar">Daftar Panitia</a>
+        <div class="status-indicator">
+            <span class="status-dot status-none"></span>
+            <span class="status-text">none</span>
+        </div>
+    </div>
+</div>
+@endsection
